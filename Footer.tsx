@@ -14,26 +14,26 @@ export default function Footer() {
 							</div>
 							<div className=''>
 								<a href="tel:+352223294" className='text-[#CDCCD8] block mb-6 mr-5'>
-									<img className='inline-block mr-3' alt="" src="/footer-icon1.svg"/>
+									<img className='inline-block mr-3' alt="" src="./footer-icon1.svg"/>
 									+352 22 32 94
 								</a>
 								<a href="tel:+352691123" className='text-[#CDCCD8] block mb-6'>
-									<img className='inline-block mr-3' alt="" src="/footer-icon2.svg"/>
+									<img className='inline-block mr-3' alt="" src="./footer-icon2.svg"/>
 									+352 69 11 23
 								</a>
 								<a href="mailto:hello@fiduciaire-premier.lu" className='text-[#CDCCD8] block mb-6'>
-									<img className='inline-block mr-3' alt="" src="/footer-icon3.svg"/>
+									<img className='inline-block mr-3' alt="" src="./footer-icon3.svg"/>
 									hello@fiduciaire-premier.lu
 								</a>
 								<span className='text-[#CDCCD8] flex items-center mb-6'>
-									<img className='inline-block mr-3' alt="" src="/footer-icon4.svg"/>
+									<img className='inline-block mr-3' alt="" src="./footer-icon4.svg"/>
 									14, rue Mathias Hardt, L-1717 Luxembourg <br/>
 									BP 460-L-2014 Luxembourg
 								</span>
 							</div>
 							<div>
-								<a href="#"><img className='inline-block mr-3' alt="" src="/facebook-01.svg"/></a>
-								<a href="#"><img className='inline-block mr-3' alt="" src="/Social Icons.svg"/></a>
+								<a href="#"><img className='inline-block mr-3' alt="" src="./facebook-01.svg"/></a>
+								<a href="#"><img className='inline-block mr-3' alt="" src="./Social Icons.svg"/></a>
 							</div>
 						</div>
 						<div>
@@ -80,7 +80,7 @@ export default function Footer() {
 											By checking this box and submitting this form, I explicitly agree that my personal data will be used to contact me in connection with my request indicated in this form. No other processing will be carried out with my information.
 										</label>
 									</div>
-									<button type="submit" className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-white transition duration-200">Send message</button>
+									<button type="submit" className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-whi transition duration-200">Send message</button>
 								</div>
 							</form>
 						</div>
@@ -93,7 +93,7 @@ export default function Footer() {
 							<p>Copyright © Fiduciaire Premier Luxembourg S.A. 2025 | All rights reserved | Privacy Policy  | Cookie Policy</p>
 						</div>
 						<div className='justify-center xl:justify-end flex items-center flex-wrap'>
-							<p className='flex items-center'>Designed By <img className='mx-[6px]' alt="" src="/Meta.svg"/></p>
+							<p className='flex items-center'>Designed By <img className='mx-[6px]' alt="" src="./Meta.svg"/></p>
 							<p>& Premium Partner of Nextimmo.lu / Secretimmo.lu / Goodwork.lu</p>
 						</div>
 					</div>
