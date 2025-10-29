@@ -69,7 +69,7 @@ export default function App() {
     }
   }, [open2]);
   return (
-    <div className="min-h-screen bg-beige">
+    <div className="min-h-screen bg-beige"> 
       <Header />
 
       <div className='relative flex items-center bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]' >
