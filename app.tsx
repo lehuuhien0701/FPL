@@ -70,6 +70,34 @@ export default function App() {
     }
   }, [open2]);
 
+  // scroll to next section when clicking the arrow image (jQuery if available, otherwise plain JS)
+  useEffect(() => {
+    const selector = '.arrow-scroll';
+    const $ = (window as any).jQuery || (window as any).$;
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      const btn = (e.currentTarget || e.target) as HTMLElement;
+      const hero = btn.closest('.relative.flex.items-center') || btn.closest('div');
+      const target = hero?.nextElementSibling as HTMLElement | null;
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    if ($) {
+      $(selector).on('click.scrollToNext', handler);
+    } else {
+      document.querySelectorAll<HTMLElement>(selector).forEach(el => el.addEventListener('click', handler));
+    }
+
+    return () => {
+      if ($) {
+        $(selector).off('.scrollToNext');
+      } else {
+        document.querySelectorAll<HTMLElement>(selector).forEach(el => el.removeEventListener('click', handler));
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-beige">
       <Header />
@@ -83,7 +111,7 @@ export default function App() {
                   <span className='text-secondary'>take care of your business’s accounting</span>
                 </h1> 
                 
-                <img className='cursor-pointer m-auto lg:m-0 block' alt="" src="./arrow-down-scroll.svg"/>
+                <img className='cursor-pointer m-auto lg:m-0 block arrow-scroll' alt="" src="./arrow-down-scroll.svg"/>
                   
             </div>
         </div>
