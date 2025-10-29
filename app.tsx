@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer'; 
 
@@ -273,12 +274,12 @@ export default function App() {
                     <h2 className='font-normal text-2xl leading-[34px] text-primary'>
                        Our News           
                     </h2>       
-                    <a href="/News" className='font-normal text-sm leading-[26px] flex items-center'>
+                    <Link to="/News" className='font-normal text-sm leading-[26px] flex items-center'>
                          All News
                          <svg className='ml-[17px]' width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <path d="M10.5 3.75L15.75 9M15.75 9L10.5 14.25M15.75 9L2.25 9" stroke="#2F324A" stroke-linecap="round" stroke-linejoin="round"/>
                          </svg> 
-                    </a>       
+                    </Link>       
                 </div> 
                 <div className='grid md:grid-cols-3 gap-10'>
                      <div>
@@ -297,7 +298,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <a href="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</a>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div>
                      <div>
@@ -316,7 +317,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <a href="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</a>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div> 
                      <div>
@@ -335,7 +336,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <a href="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</a>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div>              
                 </div>                

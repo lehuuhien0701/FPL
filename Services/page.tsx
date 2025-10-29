@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer'; 
 
@@ -17,18 +17,38 @@ const ArrowRight = () => (
 
 
 export default function App() { 
+  // attach click -> scroll to next section for arrow image
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.arrow-scroll'));
+    if (els.length === 0) return;
+
+    const onClick = (e: Event) => {
+      e.preventDefault();
+      const btn = (e.currentTarget || e.target) as HTMLElement;
+      // prefer exact hero container, fallback to any .relative ancestor
+      const hero = btn.closest('.relative.flex.items-center') || btn.closest('.relative');
+      const target = hero?.nextElementSibling as HTMLElement | null;
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    els.forEach(el => el.addEventListener('click', onClick));
+    return () => els.forEach(el => el.removeEventListener('click', onClick));
+  }, []);
+
   return (
     <div className="min-h-screen bg-beige relative">
       <Header />
-      <div className='relative flex items-center bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]'>
-        <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply' style={{ background: 'var(--custom-gradient)' }}> </div>
+      <div className='relative flex items-center' style={{ backgroundImage: 'url(./thumbnail06.jpg)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '430px', }}>
+        <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]'> </div>
         <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative z-10'>
             <div className='lg:max-w-[560px]'> 
                 <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[50px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
                   Economic consulting 
                 </h1> 
                 
-                <img className='cursor-pointer m-auto lg:m-0 block' alt="" src="./arrow-down-scroll.svg"/>
+                <img className='cursor-pointer m-auto lg:m-0 block arrow-scroll' alt="" src="./arrow-down-scroll.svg"/>
                   
             </div>
         </div>

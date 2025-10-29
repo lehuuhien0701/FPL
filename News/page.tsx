@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Header';
 import Footer from '../Footer'; 
 
@@ -77,8 +78,8 @@ export default function App() {
     const handler = (e: Event) => {
       e.preventDefault();
       const btn = (e.currentTarget || e.target) as HTMLElement;
-      // find hero container (the parent section with the hero classes)
-      const hero = btn.closest('.relative.flex.items-center') || btn.closest('div');
+      // find hero container marked with data-hero
+      const hero = btn.closest('[data-hero]') as HTMLElement | null;
       const target = hero?.nextElementSibling as HTMLElement | null;
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     };
@@ -103,8 +104,8 @@ export default function App() {
     <div className="min-h-screen bg-beige"> 
       <Header />
 
-      <div className='relative flex items-center bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]' >
-        <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply' style={{ background: 'var(--custom-gradient)' }}> </div>
+      <div data-hero className='relative flex items-center' style={{ backgroundImage: 'url(./thumbnail03.png)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '430px', }} >
+        <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]'> </div>
         <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative z-10'>
             <div className='lg:max-w-[560px]'> 
                 <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[50px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
@@ -137,7 +138,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div>
                      <div>
@@ -156,7 +157,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div> 
                      <div>
@@ -175,7 +176,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
+                              <Link to="/News/single" className="inline-block w-full sm:w-auto text-sm leading-[44px] font-medium text-white bg-primary h-11 px-10 hover:bg-[#CCAB80] hover:text-[#2F324A] transition duration-200">Read more</Link>
                           </div>
                      </div>              
                 </div>                

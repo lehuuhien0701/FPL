@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 // Custom Icons
 const CheckIcon = () => (
   <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,9 +124,9 @@ export default function Header() {
 				<nav className="bg-white border-b border-white/10 sticky top-0">
 					<div className="h-[88px] flex items-center justify-between">
 						<h1 className='font-merriweather font-bold text-base md:text-xl leading-6'>
-							<a href="/" aria-label="Go to home" className="text-[#2F324A] hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#CCAB80]">
+							<Link to="/" aria-label="Go to home" className="text-[#2F324A] hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#CCAB80]">
 								Fiduciaire Premier Luxembourg S.A.
-							</a>
+							</Link>
 						</h1>
 						<div className="flex items-center gap-10">
 							<div className='flex items-center'>
@@ -212,26 +212,26 @@ export default function Header() {
 					</div>
 
 					{/* primary nav list */}
-					<div className='px-6 py-8'>
+					<div className='sm:px-6 pb-0 pt-24'>
 						<ul className='space-y-6'>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-[#D9BA92]'>
-								<a href="/" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>Home</a>
+								<Link to="/" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>Home</Link> 
 							</li>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
 								<div className='flex items-center pl-[10px] sm:pl-[30px] md:pl-[90px]'>
-									<span>Services</span>
+									<span>Services</span> 
 								</div>
-								<ul className='pl-[70px] md:pl-[130px] mt-4 space-y-3'>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon1.svg"/> Chartered Accountants</a></li>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon2.svg"/> Economic consulting</a></li>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon3.svg"/> Taxation</a></li>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon4.svg"/> The social secretariat</a></li>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon5.svg"/> Asset engineering</a></li>
-									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon6.svg"/> Domiciliation</a></li>
+								<ul className='pl-[30px] md:pl-[130px] mt-4 space-y-3'>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon1.svg"/> Chartered Accountants</Link></li>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon2.svg"/> Economic consulting</Link></li>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon3.svg"/> Taxation</Link></li>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon4.svg"/> The social secretariat</Link></li>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon5.svg"/> Asset engineering</Link></li>
+									<li><Link to="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon6.svg"/> Domiciliation</Link></li>
 								</ul>
 							</li>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
-								<a href="/News" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>News</a>
+								<Link to="/News" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>News</Link>
 							</li>
 						</ul>
 					</div>
@@ -384,7 +384,7 @@ export default function Header() {
 										</div>
 										<button
 											type="submit"
-											className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-primary transition duration-200"
+											className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-white transition duration-200"
 										>
 											Send message
 										</button>
