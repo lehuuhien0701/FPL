@@ -139,16 +139,16 @@ export default function App() {
                   <div className='box-question'>
                       <div className='bg-white border-2 border-[#CDCCD8] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.08)] p-6 mb-4'>
                           <div className='flex items-center'>
-                              <img className='mr-4' alt="" src="./public/icon1.svg"/>  
+                              <img className='mr-4' alt="" src="./icon1.svg"/>  
                               <h3 onClick={() => setOpen1(o => !o)} className='font-medium text-xl leading-[30px] text-secondary relative pr-10 w-full cursor-pointer'>
                                   Chartered Accountants
                                   {open1 ? (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#2F324A] rounded-full flex items-center justify-center'>
-                                      <img className='' alt="" src="./public/arrow-down.svg" style={{ transform: 'rotate(180deg)', transition: 'transform 220ms ease' }} />
+                                      <img className='' alt="" src="./arrow-down.svg" style={{ transform: 'rotate(180deg)', transition: 'transform 220ms ease' }} />
                                     </span>
                                   ) : (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#ffffff] shadow-[6px_10px_20px_rgba(0,0,0,0.12)] rounded-full flex items-center justify-center'>
-                                      <img className='' alt="" src="./public/arrow-down-white.svg" style={{ transform: 'rotate(0deg)', transition: 'transform 220ms ease' }} />
+                                      <img className='' alt="" src="./arrow-down-white.svg" style={{ transform: 'rotate(0deg)', transition: 'transform 220ms ease' }} />
                                     </span>
                                   )}
                               </h3>
@@ -183,16 +183,16 @@ export default function App() {
                       </div>
                       <div className='bg-white border-2 border-[#CDCCD8] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.08)] p-6 mb-4'>
                           <div className='flex items-center'>
-                              <img className='mr-4' alt="" src="./public/icon1.svg"/>  
+                              <img className='mr-4' alt="" src="./icon1.svg"/>  
                               <h3 onClick={() => setOpen2(o => !o)} className='font-medium text-xl leading-[30px] text-secondary relative pr-10 w-full cursor-pointer'>
                                   Chartered Accountants
                                   {open2 ? (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#2F324A] rounded-full flex items-center justify-center'>
-                                      <img className='' alt="" src="./public/arrow-down.svg" style={{ transform: 'rotate(180deg)', transition: 'transform 220ms ease' }} />
+                                      <img className='' alt="" src="./arrow-down.svg" style={{ transform: 'rotate(180deg)', transition: 'transform 220ms ease' }} />
                                     </span>
                                   ) : (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#ffffff] shadow-[6px_10px_20px_rgba(0,0,0,0.12)] rounded-full flex items-center justify-center'>
-                                      <img className='' alt="" src="./public/arrow-down-white.svg" style={{ transform: 'rotate(0deg)', transition: 'transform 220ms ease' }} />
+                                      <img className='' alt="" src="./arrow-down-white.svg" style={{ transform: 'rotate(0deg)', transition: 'transform 220ms ease' }} />
                                     </span>
                                   )}
                               </h3>

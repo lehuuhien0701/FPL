@@ -72,7 +72,7 @@ export default function App() {
     <div className="min-h-screen bg-beige">
       <Header />
 
-      <div className='relative flex items-center' style={{ backgroundImage: 'url(./thumbnail03.png)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundSize: 'cover', height: '435px', }} >
+      <div className='relative flex items-center bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]' >
         <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply' style={{ background: 'var(--custom-gradient)' }}> </div>
         <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative z-10'>
             <div className='lg:max-w-[560px]'> 
