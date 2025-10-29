@@ -189,7 +189,7 @@ export default function App() {
                                   {open2 ? (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#2F324A] rounded-full flex items-center justify-center'>
                                       <img className='' alt="" src="./arrow-down.svg" style={{ transform: 'rotate(180deg)', transition: 'transform 220ms ease' }} />
-                                    </span>
+                                    </span> 
                                   ) : (
                                     <span className='absolute top-0 right-0 w-[30px] h-[30px] bg-[#ffffff] shadow-[6px_10px_20px_rgba(0,0,0,0.12)] rounded-full flex items-center justify-center'>
                                       <img className='' alt="" src="./arrow-down-white.svg" style={{ transform: 'rotate(0deg)', transition: 'transform 220ms ease' }} />
