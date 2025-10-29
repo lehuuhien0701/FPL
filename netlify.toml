@@ -1,12 +1,7 @@
 [build]
-  # Đảm bảo lệnh build chạy đúng (ví dụ: npm run build)
   command = "npm run build"
-  # Đặt thư mục publish về thư mục output của Vite (thường là 'dist')
-  publish = "dist"
+  publish = ".next"
 
-# Quy tắc chuyển hướng để React Router hoạt động (quan trọng nhất)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  
