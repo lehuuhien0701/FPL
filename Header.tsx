@@ -215,23 +215,23 @@ export default function Header() {
 					<div className='px-6 py-8'>
 						<ul className='space-y-6'>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-[#D9BA92]'>
-								<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>Home</a>
+								<a href="/" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>Home</a>
 							</li>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
 								<div className='flex items-center pl-[10px] sm:pl-[30px] md:pl-[90px]'>
 									<span>Services</span>
 								</div>
 								<ul className='pl-[70px] md:pl-[130px] mt-4 space-y-3'>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon1.svg"/> Chartered Accountants</a></li>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon2.svg"/> Economic consulting</a></li>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon3.svg"/> Taxation</a></li>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon4.svg"/> The social secretariat</a></li>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon5.svg"/> Asset engineering</a></li>
-									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon6.svg"/> Domiciliation</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon1.svg"/> Chartered Accountants</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon2.svg"/> Economic consulting</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon3.svg"/> Taxation</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon4.svg"/> The social secretariat</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon5.svg"/> Asset engineering</a></li>
+									<li><a href="/Services" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon6.svg"/> Domiciliation</a></li>
 								</ul>
 							</li>
 							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
-								<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>News</a>
+								<a href="/News" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>News</a>
 							</li>
 						</ul>
 					</div>
