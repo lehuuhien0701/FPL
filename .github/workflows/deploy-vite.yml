@@ -1,9 +1,13 @@
 name: Deploy Vite site to GitHub Pages
 
+# Cấp quyền cho GITHUB_TOKEN ghi nội dung repo
+permissions:
+  contents: write
+
 on:
   push:
     branches:
-      - main   # thay bằng branch bạn muốn deploy nếu không phải main
+      - main  # thay nếu bạn dùng branch khác
 
 jobs:
   build-and-deploy:
@@ -29,3 +33,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
