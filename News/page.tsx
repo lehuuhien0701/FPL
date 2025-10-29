@@ -17,6 +17,10 @@ const ArrowRight = () => (
 
 
 export default function App() { 
+  const scrollToFooter = () => {
+    const el = document.getElementById('site-footer');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
   const contentRef1 = useRef<HTMLDivElement | null>(null);
   const contentRef2 = useRef<HTMLDivElement | null>(null);
   const [open1, setOpen1] = useState(true);
@@ -102,7 +106,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10">Contact us</button>
+                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
                           </div>
                      </div>
                      <div>
@@ -121,7 +125,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10">Contact us</button>
+                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
                           </div>
                      </div> 
                      <div>
@@ -140,7 +144,7 @@ export default function App() {
                                   Lorem ipsum dolor sit amet consectetur. Tortor in egestas tellus tristique ultricies vel. Lectus in lectus egestas dictum m...
                                 </p>
                               </div>
-                              <button className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10">Contact us</button>
+                              <button onClick={scrollToFooter} className="w-full sm:w-auto text-sm font-medium text-white bg-primary h-11 px-10 hover:bg-[#ccab80] transition duration-200">Contact us</button>
                           </div>
                      </div>              
                 </div>                

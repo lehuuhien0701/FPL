@@ -21,14 +21,29 @@ export default function Header() {
 		const menu = document.querySelector<HTMLElement>('.menu-click');
 		if (!svgOpen || !menu) return;
 
+		// inject CSS to make menu overlay fullscreen when body has .menu-open
+		if (!document.getElementById('menu-open-style')) {
+			const style = document.createElement('style');
+			style.id = 'menu-open-style';
+			style.textContent = `
+				body.menu-open { overflow: hidden !important; }
+				.menu-click { display: none; }
+				.menu-click.show { display: block !important; position: fixed !important; inset: 0 !important; z-index: 99999 !important; overflow: auto !important; }
+			`;
+			document.head.appendChild(style);
+		}
+
 		const openHandler = () => {
 			menu.classList.remove('hidden');
 			menu.classList.add('show');
+			// lock body scroll and ensure menu is fullscreen via CSS
+			document.body.classList.add('menu-open');
 		};
 
 		const closeHandler = () => {
 			menu.classList.remove('show');
 			menu.classList.add('hidden');
+			document.body.classList.remove('menu-open');
 		};
 
 		const onDocumentClick = (e: MouseEvent) => {
@@ -48,37 +63,130 @@ export default function Header() {
 			svgOpen.removeEventListener('click', openHandler);
 			if (svgClose) svgClose.removeEventListener('click', closeHandler);
 			document.removeEventListener('click', onDocumentClick);
+			// ensure class removed on unmount
+			document.body.classList.remove('menu-open');
+		};
+	}, []);
+	
+	// Toggle .box-submenu khi click .open-language (plain JS)
+	useEffect(() => {
+		const buttons = Array.from(document.querySelectorAll<HTMLElement>('.open-language'));
+		if (buttons.length === 0) return;
+
+		const onBtnClick = (e: Event) => {
+			e.stopPropagation();
+			const btn = e.currentTarget as HTMLElement;
+			const container = btn.closest('.pr-5') || btn.parentElement;
+			const box = container?.querySelector<HTMLElement>('.box-submenu');
+			if (!box) return;
+
+			// close other open boxes
+			document.querySelectorAll<HTMLElement>('.box-submenu.show').forEach(b => {
+				if (b !== box) {
+					b.classList.remove('show');
+					b.classList.add('hidden');
+				}
+			});
+
+			if (box.classList.contains('show')) {
+				box.classList.remove('show');
+				box.classList.add('hidden');
+			} else {
+				box.classList.add('show');
+				box.classList.remove('hidden');
+			}
+		};
+
+		const onDocClick = (e: MouseEvent) => {
+			const t = e.target as HTMLElement | null;
+			if (!t) return;
+			if (!t.closest('.box-submenu') && !t.closest('.open-language')) {
+				document.querySelectorAll<HTMLElement>('.box-submenu.show').forEach(b => {
+					b.classList.remove('show');
+					b.classList.add('hidden');
+				});
+			}
+		};
+
+		buttons.forEach(b => b.addEventListener('click', onBtnClick));
+		document.addEventListener('click', onDocClick);
+
+		return () => {
+			buttons.forEach(b => b.removeEventListener('click', onBtnClick));
+			document.removeEventListener('click', onDocClick);
 		};
 	}, []);
 
 	return (
 		<>
-			{/* Navigation */}
-			<div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20'>
+		<div className='wrap-header'>
+			<div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative z-10'>
 				<nav className="bg-white border-b border-white/10 sticky top-0">
 					<div className="h-[88px] flex items-center justify-between">
-						<h1 className='font-merriweather font-bold text-base md:text-xl leading-6 text-[#2F324A]'>Fiduciaire Premier Luxembourg S.A.</h1>
+						<h1 className='font-merriweather font-bold text-base md:text-xl leading-6'>
+							<a href="/" aria-label="Go to home" className="text-[#2F324A] hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#CCAB80]">
+								Fiduciaire Premier Luxembourg S.A.
+							</a>
+						</h1>
 						<div className="flex items-center gap-10">
 							<div className='flex items-center'>
-								<div className="flex items-center justify-center pr-5 md:pr-10 border-r border-[#E5E7EB]">
-									<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
-										<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
-										<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
-										<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
-										<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
-										<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
-										<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
-									</svg>
-									<span className='flex items-center ml-[10px] mr-[10px]'>
-										English
-										<svg className='ml-[10px]' width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M4.75 10.875L0.125 6.28125C0.0416667 6.19792 0 6.10938 0 6.01562C0 5.92188 0.03125 5.83333 0.09375 5.75L0.71875 5.125C0.802083 5.0625 0.895833 5.03125 1 5.03125C1.10417 5.03125 1.1875 5.0625 1.25 5.125L5 8.84375L8.75 5.125C8.8125 5.0625 8.89583 5.03125 9 5.03125C9.10417 5.03125 9.19792 5.0625 9.28125 5.125L9.90625 5.75C9.96875 5.83333 10 5.92188 10 6.01562C10 6.10938 9.96875 6.19792 9.90625 6.28125L5.28125 10.875C5.19792 10.9375 5.10417 10.9688 5 10.9688C4.89583 10.9688 4.80208 10.9375 4.71875 10.875H4.75Z" fill="#2F324A"/>
+								<div className="hidden md:block pr-5 md:pr-10 border-r border-[#E5E7EB] cursor-pointer relative">
+									<div className='open-language flex items-center justify-center'>
+										<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+											<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+											<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+											<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+											<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+											<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+											<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
 										</svg>
-									</span>
+										<span className='flex items-center ml-[10px] mr-[10px]'>
+											English
+											<svg className='ml-[10px]' width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M4.75 10.875L0.125 6.28125C0.0416667 6.19792 0 6.10938 0 6.01562C0 5.92188 0.03125 5.83333 0.09375 5.75L0.71875 5.125C0.802083 5.0625 0.895833 5.03125 1 5.03125C1.10417 5.03125 1.1875 5.0625 1.25 5.125L5 8.84375L8.75 5.125C8.8125 5.0625 8.89583 5.03125 9 5.03125C9.10417 5.03125 9.19792 5.0625 9.28125 5.125L9.90625 5.75C9.96875 5.83333 10 5.92188 10 6.01562C10 6.10938 9.96875 6.19792 9.90625 6.28125L5.28125 10.875C5.19792 10.9375 5.10417 10.9688 5 10.9688C4.89583 10.9688 4.80208 10.9375 4.71875 10.875H4.75Z" fill="#2F324A"/>
+											</svg>
+										</span>
+									</div>
+									<div className='box-submenu absolute top-[50px] left-[-16px] bg-white p-4 hidden'>
+										<ul>
+											<li className='mb-2'>
+												<div className='open-language flex items-center justify-center'>
+													<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+														<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+														<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+														<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+														<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+														<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+														<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
+													</svg>
+													<span className='flex items-center ml-[10px] mr-[10px]'>
+														English 
+													</span>
+												</div>
+											</li>
+											<li>
+												<div className='open-language flex items-center justify-center'>
+													<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+														<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+														<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+														<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+														<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+														<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+														<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
+													</svg>
+													<span className='flex items-center ml-[10px] mr-[10px]'>
+														English 
+													</span>
+												</div>
+											</li>
+										</ul>
+									</div>
 								</div>
 								<div className='flex items-center pl-5 md:pl-10'>
-									<svg className='open' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg className='open cursor-pointer' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="15.1602" y="30.2928" width="20.9723" height="3.22651" rx="1.61326" fill="#CCAB80"/>
 										<rect x="23.2265" y="21.4199" width="12.9061" height="3.22651" rx="1.61326" fill="#CCAB80"/>
 										<rect x="3.86743" y="13.3536" width="32.2651" height="3.22651" rx="1.61326" fill="#CCAB80"/>
@@ -95,82 +203,43 @@ export default function Header() {
 			</div>
 
 			{/* Menu overlay */}
-			<div className='menu-click bg-[linear-gradient(180deg,#383842_0%,#19191D_100%)] absolute top-0 left-0 right-0 z-30 hidden'>
+			<div className='menu-click bg-[linear-gradient(180deg,#383842_0%,#19191D_100%)] absolute top-0 left-0 right-0 z-[99999] hidden'>
 				<div className='max-w-[1400px] mx-auto w-full px-0 md:px-10 lg:px-20 relative'>
 					<div className='absolute top-6 right-[20px] sm:right-[40px] md:right-[90px] lg:right-[130px]'>
-						<svg className='close' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg className='close cursor-pointer' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M11 29L29 11M11 11L29 29" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 						</svg>
 					</div>
-					<ul>
-						<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-[#D9BA92]'>
-							<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>
-								Home
-							</a>
-						</li>
-						<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
-							<a href="#" className='flex items-center pl-[10px] sm:pl-[30px] md:pl-[90px]'>
-								Services
-								<span className='ml-5'>
-									<svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M5.7 9.34375L0.15 1.87891C0.05 1.74349 0 1.59961 0 1.44727C0 1.29492 0.0375 1.15104 0.1125 1.01562L0.8625 0H11.1375L11.8875 1.01562C11.9625 1.15104 12 1.29492 12 1.44727C12 1.59961 11.9625 1.74349 11.8875 1.87891L6.3375 9.34375C6.2375 9.44531 6.125 9.49609 6 9.49609C5.875 9.49609 5.7625 9.44531 5.6625 9.34375H5.7Z" fill="#CCAB80"/>
-									</svg>
-								</span>
-							</a>
-							<ul className='pl-[70px] md:pl-[130px]'>
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon1.svg"/>
-										Chartered Accountants
-									</a>
-								</li>
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon2.svg"/>
-										Economic consulting
-									</a>
-								</li>
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon3.svg"/>
-										Taxation
-									</a>
-								</li>
 
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon4.svg"/>
-										The social secretariat
-									</a>
-								</li>
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon4.svg"/>
-										Incorporation of companies
-									</a>
-								</li>
-								<li className='mb-3'>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon5.svg"/>
-										Asset engineering
-									</a>
-								</li>
-								<li className=''>
-									<a href="#" className='text-lg flex items-center'>
-										<img className='mr-4' alt="" src="/icon6.svg"/>
-										Domiciliation
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
-							<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>
-								News
-							</a>
-						</li>
-					</ul>
+					{/* primary nav list */}
+					<div className='px-6 py-8'>
+						<ul className='space-y-6'>
+							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-[#D9BA92]'>
+								<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>Home</a>
+							</li>
+							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
+								<div className='flex items-center pl-[10px] sm:pl-[30px] md:pl-[90px]'>
+									<span>Services</span>
+								</div>
+								<ul className='pl-[70px] md:pl-[130px] mt-4 space-y-3'>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon1.svg"/> Chartered Accountants</a></li>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon2.svg"/> Economic consulting</a></li>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon3.svg"/> Taxation</a></li>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon4.svg"/> The social secretariat</a></li>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon5.svg"/> Asset engineering</a></li>
+									<li><a href="#" className='text-lg flex items-center'><img className='mr-4' alt="" src="/icon6.svg"/> Domiciliation</a></li>
+								</ul>
+							</li>
+							<li className='font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] border-transparent'>
+								<a href="#" className='pl-[10px] sm:pl-[30px] md:pl-[90px]'>News</a>
+							</li>
+						</ul>
+					</div>
+
+					
 				</div>
-
+		
+				{/* contact + form (kept) */}
 				<div className='pb-10 pt-10 mt-10 border-t border-[#ffffff33]'>
 					<div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative'>
 						<div className='md:flex md:gap-10 lg:gap-20 sm:px-[20px] md:px-[100px]'>
@@ -324,8 +393,55 @@ export default function Header() {
 							</div>
 						</div>
 					</div>
-				</div>
+
+					<div className="pt-10 flex gap-3 items-center justify-center md:hidden text-white pr-5 md:pr-10 border-r border-[#E5E7EB] cursor-pointer relative">
+						<div className='open-language flex items-center justify-center'>
+							<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+								<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+								<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+								<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+								<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+								<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+								<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
+							</svg>  
+						</div>
+						<div className='box-submenu'>
+							<ul className='flex items-center gap-3'>
+								<li className=''>
+									<div className='open-language flex items-center justify-center'>
+										<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+											<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+											<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+											<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+											<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+											<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+											<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
+										</svg> 
+									</div>
+								</li>
+								<li>
+									<div className='open-language flex items-center justify-center'>
+										<svg className='rounded-full' width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M-0.234924 -1.03876H30.3105V31.1143H-0.234924V-1.03876Z" fill="#083F80"/>
+											<path d="M-0.234924 10.2151H30.3105V19.7462H-0.234924V10.2151Z" fill="white"/>
+											<path d="M17.9548 -1.11433V31.0388H11.9184V-1.11433H17.9548Z" fill="white"/>
+											<path d="M30.3105 27.5545V31.1143H26.6742L-0.234924 2.86548V-1.03876H3.3287L30.3105 27.5545Z" fill="white"/>
+											<path d="M30.3105 2.52107V-1.03876H26.6742L-0.234924 27.0952V31.1143H3.3287L30.3105 2.52107Z" fill="white"/>
+											<path d="M-0.234893 1.48755L7.98329 10.2148H10.456L-0.234924 -1.03876L-0.234893 1.48755ZM30.3105 28.4732L22.0924 19.7459H19.6196L30.3106 31.1143L30.3105 28.4732ZM17.9469 9.29614V10.2148H19.5469L30.3105 -1.03876H27.6196L17.9469 9.29614ZM12.1287 20.7794V19.7459H10.5287L-0.234893 31.1143H2.45601L12.1287 20.7794ZM13.2196 -1.03876H16.7833V31.1143H13.2196V-1.03876Z" fill="#B7333C"/>
+											<path d="M-0.310547 17.8409V12.2142H30.3076V17.841L-0.310547 17.8409Z" fill="#B7333C"/>
+										</svg> 
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>	
+
+
+				</div> 
 			</div>
+		</div>
 		</>
 	);
 }

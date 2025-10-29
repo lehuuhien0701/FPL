@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
 	return (
-		<footer className="bg-[linear-gradient(180deg,#383842_0%,#19191D_100%)]">
+		<footer id="site-footer" className="bg-[linear-gradient(180deg,#383842_0%,#19191D_100%)]">
 			<div className="max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 pt-20">
 				<div className='border-b border-[#9CA3AF] mb-10 pb-20'>
 					<div className='md:flex md:gap-10 lg:gap-20'>
@@ -41,34 +41,34 @@ export default function Footer() {
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 									<div className="flex flex-col space-y-[4px]">
 										<label htmlFor="fname" className="font-normal text-sm leading-none text-[#CDCCD8]">First name</label>
-										<input type="text" id="fname" className="w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
+										<input type="text" id="fname" className="text-base text-white w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
 									</div>
 									<div className="flex flex-col space-y-[4px]">
 										<label htmlFor="lname" className="font-normal text-sm leading-none text-[#CDCCD8]">Last name</label>
-										<input type="text" id="lname" className="w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
+										<input type="text" id="lname" className="text-base text-white w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
 									</div>
 								</div>
 
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 									<div className="flex flex-col space-y-[4px]">
 										<label htmlFor="email" className="font-normal text-sm leading-none text-[#CDCCD8]">E-mail *</label>
-										<input type="email" id="email" className="w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
+										<input type="email" id="email" className="text-base text-white w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
 									</div>
 									<div className="flex flex-col space-y-[4px]">
 										<label htmlFor="phone" className="font-normal text-sm leading-none text-[#CDCCD8]">Phone</label>
-										<input type="number" id="phone" className="w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
+										<input type="number" id="phone" className="text-base text-white w-full h-11 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder=""/>
 									</div>
 								</div>
 
 								<div className="flex flex-col space-y-[4px]">
 									<label htmlFor="message" className="font-normal text-sm leading-none text-[#CDCCD8]">Message *</label>
-									<textarea id="message" className="w-full h-40 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder="Your message"></textarea>
+									<textarea id="message" className="text-base text-white w-full h-40 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]" placeholder="Your message"></textarea>
 								</div>
 
 								<div className="space-y-6">
 									<div className='flex items-center'>
-										<input type="checkbox" id="emailOptIn" name="emailOptIn" className="peer2 hidden"/>
-										<label htmlFor="emailOptIn" className="custom-checkbox-button2 mr-[10px] relative flex items-center justify-center flex-shrink-0">
+										<input type="checkbox" id="emailOptIn2" name="emailOptIn" className="peer2 hidden"/>
+										<label htmlFor="emailOptIn2" className="custom-checkbox-button2 mr-[10px] relative flex items-center justify-center flex-shrink-0">
 											<svg className='absolute h-4 w-4 text-white opacity-0 transition-opacity duration-200' width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<g opacity="0.6">
 													<rect x="0.5" y="0.5" width="15" height="15" rx="1.5" stroke="#CDCCD8"/>
@@ -76,7 +76,7 @@ export default function Footer() {
 												</g>
 											</svg>
 										</label>
-										<label htmlFor="emailOptIn" className="font-normal text-xs text-[#CDCCD8] cursor-pointer select-none">
+										<label htmlFor="emailOptIn2" className="font-normal text-xs text-[#CDCCD8] cursor-pointer select-none">
 											By checking this box and submitting this form, I explicitly agree that my personal data will be used to contact me in connection with my request indicated in this form. No other processing will be carried out with my information.
 										</label>
 									</div>
