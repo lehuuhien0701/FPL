@@ -80,7 +80,7 @@ export default function Footer() {
 											By checking this box and submitting this form, I explicitly agree that my personal data will be used to contact me in connection with my request indicated in this form. No other processing will be carried out with my information.
 										</label>
 									</div>
-									<button type="submit" className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-whi transition duration-200">Send message</button>
+									<button type="submit" className="w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-white transition duration-200">Send message</button>
 								</div>
 							</form>
 						</div>

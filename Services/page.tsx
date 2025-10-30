@@ -61,7 +61,7 @@ export default function App() {
                   <div className='box-question'> 
                       <div className='bg-white border-2 border-[#CDCCD8] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.08)] p-6 mb-4'>
                           <div className='flex items-center'>
-                              <img className='mr-4' alt="" src="./public/icon1.svg"/>  
+                              <img className='mr-4' alt="" src="./icon1.svg"/>  
                               <h3 className='font-medium text-xl leading-[30px] text-secondary relative w-full'>
                                   Chartered Accountants 
                               </h3>
